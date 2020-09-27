@@ -1,10 +1,10 @@
 import React from "react";
 import cartIcon from "./img/shopping-cart.png";
 
-export default function Cart({ items }) {
+export default function Cart({ items, openCart }) {
   const empty = items.length === 0;
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", cursor: "pointer" }} onClick={openCart}>
       <p style={{ fontSize: "20px", fontWeight: "bold", margin: "1rem" }}>
         {empty && "cart empty"}
         {!empty && items.length}
