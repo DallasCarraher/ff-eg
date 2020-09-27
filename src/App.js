@@ -9,6 +9,7 @@ function App() {
   const [menu, setMenu] = useState([]);
   const [items, setItems] = useState([]);
   const [cart, toggleCart] = useState(false);
+  const [total, setTotal] = useState(0);
 
   function openCart() {
     toggleCart(true);
@@ -22,13 +23,18 @@ function App() {
     })();
   }, []);
 
-  function addToCart(item) {
-    const updatedCart = [...items, item];
+  function addToCart(item, size, price) {
+    setTotal(total + price);
+    const newItem = { name: item.item, size, price };
+    const updatedCart = [...items, newItem];
     setItems(updatedCart);
   }
 
   function sendToPayment(items) {
     console.table(items);
+    setTotal(0);
+    setItems([]);
+    toggleCart(false);
   }
 
   return (
@@ -67,7 +73,9 @@ function App() {
             {!items.length && <h3>Cart is Empty</h3>}
             {items.map((item) => (
               <div key={keygen()} style={{ display: "flex" }}>
-                <h3>{item.item}</h3>
+                <h3>
+                  {item.size} {item.name} - ${item.price}
+                </h3>
               </div>
             ))}
           </div>
@@ -78,6 +86,7 @@ function App() {
               padding: "5rem",
             }}
           >
+            <h2>Total: ${total}</h2>
             <button
               onClick={() => {
                 sendToPayment(items);
