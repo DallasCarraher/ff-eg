@@ -89,6 +89,7 @@ export default function Menu({ menu, cartHandler }) {
                 })}
               </div>
               <button
+                data-testid={`${item.item}-addToCart`}
                 style={{ margin: "3rem" }}
                 onClick={(e) => {
                   e.preventDefault();
