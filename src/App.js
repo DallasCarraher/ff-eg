@@ -25,7 +25,7 @@ function App() {
 
   function addToCart(item, size, price) {
     setTotal(total + price);
-    const newItem = { name: item.item, size, price };
+    const newItem = { id: keygen(), name: item.item, size, price };
     const updatedCart = [...items, newItem];
     setItems(updatedCart);
   }
@@ -73,6 +73,27 @@ function App() {
             {!items.length && <h3>Cart is Empty</h3>}
             {items.map((item) => (
               <div key={keygen()} style={{ display: "flex" }}>
+                <button
+                  style={{
+                    margin: "1rem",
+                    border: "none",
+                    borderRadius: 10,
+                    outline: "none",
+                  }}
+                  onClick={() => {
+                    let newItems = items.filter(
+                      (foodItem) => foodItem.id !== item.id
+                    );
+                    setItems(newItems);
+                    let newTotal = 0;
+                    newItems.forEach((item) => {
+                      newTotal += item.price;
+                    });
+                    setTotal(newTotal);
+                  }}
+                >
+                  X
+                </button>
                 <h3>
                   {item.size} {item.name} - ${item.price}
                 </h3>
