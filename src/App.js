@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { url } from "./constants";
+// import { url } from "./constants";
 import menuMock from "./__mocks__/menu.json";
 import keygen from "./components/utils";
 import { Cart, Menu } from "./components";
