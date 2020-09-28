@@ -90,9 +90,11 @@ export default function Menu({ menu, cartHandler }) {
               </div>
               <button
                 style={{ margin: "3rem" }}
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   cartHandler(item, size, price);
                 }}
+                disabled={!size || item.item !== chosenItem}
               >
                 <h2>Add to Cart</h2>
               </button>
